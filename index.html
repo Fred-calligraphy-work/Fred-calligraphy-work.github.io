@@ -1,82 +1,151 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>书法作品集 | Your Name</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: "Helvetica Neue", sans-serif;
-            background-color: #f6f6f6;
-            color: #111;
-        }
-        header {
-            text-align: center;
-            padding: 40px 0 20px;
-        }
-        h1 {
-            font-size: 32px;
-            letter-spacing: 4px;
-        }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-        .gallery img {
-            width: 100%;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-        .gallery img:hover {
-            transform: scale(1.03);
-        }
-        /* 预览灯箱 */
-        #lightbox {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-        #lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>书法作品展 | Fred</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "STKaiti", "KaiTi", serif;
+        background: url("images/ink-texture.JPNG") #f6f2e8 fixed;
+        background-size: cover;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 40px 20px;
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(2px);
+        border-radius: 12px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 38px;
+        letter-spacing: 6px;
+        margin-bottom: 40px;
+    }
+
+    h2 {
+        margin-top: 50px;
+        font-size: 28px;
+        border-left: 6px solid #000;
+        padding-left: 12px;
+    }
+
+    .sub-title {
+        font-size: 20px;
+        margin: 10px 0 20px;
+        color: #444;
+    }
+
+    /* 图片 */
+    .img-box {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .img-box img {
+        width: 100%;
+        max-width: 900px;
+        border-radius: 8px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    .img-box img:hover {
+        transform: scale(1.02);
+    }
+
+    /* 小图画廊 */
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .gallery img {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+        cursor: pointer;
+        transition: transform .2s;
+    }
+    .gallery img:hover {
+        transform: scale(1.03);
+    }
+
+    /* ===== Lightbox 灯箱 ===== */
+    #lightbox {
+        position: fixed;
+        display: none;
+        justify-content: center;
+        align-items: center;
+
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.85);
+        z-index: 2000;
+    }
+
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 8px;
+        box-shadow: 0 0 25px rgba(255,255,255,0.3);
+    }
+</style>
 </head>
+
 <body>
 
-<header>
-    <h1>书法作品集</h1>
-</header>
+<div class="container">
+    <h1>书法作品展</h1>
 
-<div class="gallery">
-    <img src="images/1.jpg" alt="">
-    <img src="images/2.jpg" alt="">
-    <img src="images/3.jpg" alt="">
-    <img src="images/4.jpg" alt="">
+    <!-- ================= 长篇幅作品 ================= -->
+    <h2>长篇幅作品</h2>
+
+    <div class="img-box">
+        <div class="sub-title">《滕王阁序》</div>
+        <img src="images/1.jpg" class="zoom-img">
+    </div>
+
+    <div class="img-box">
+        <div class="sub-title">《兰亭集序》</div>
+        <img src="images/2.jpg" class="zoom-img">
+    </div>
+
+    <!-- ================= 春联 & 福字 ================= -->
+    <h2>春联 & 福字</h2>
+
+    <div class="gallery">
+        <img src="images/3.jpg" class="zoom-img">
+        <img src="images/4.jpg" class="zoom-img">
+        <img src="images/5.jpg" class="zoom-img">
+        <img src="images/6.jpg" class="zoom-img">
+        <img src="images/7.jpg" class="zoom-img">
+    </div>
 </div>
 
+
+<!-- Lightbox 灯箱 -->
 <div id="lightbox">
     <img src="">
 </div>
 
 <script>
     const lightbox = document.getElementById("lightbox");
-    const lightboxImg = lightbox.querySelector("img");
+    const lightImg = lightbox.querySelector("img");
 
-    document.querySelectorAll(".gallery img").forEach(img => {
+    document.querySelectorAll(".zoom-img").forEach(img => {
         img.addEventListener("click", () => {
-            lightboxImg.src = img.src;
+            lightImg.src = img.src;
             lightbox.style.display = "flex";
         });
     });
